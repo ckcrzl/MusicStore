@@ -36,6 +36,8 @@ namespace MusicStore.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // TODO: All this configuration needs to be done manually right now.
+            //       We can remove this once EF supports the conventions again.
             builder.Entity<Album>().ToTable("Albums");
             builder.Entity<Artist>().ToTable("Artists");
             builder.Entity<Order>().ToTable("Orders");
@@ -69,6 +71,8 @@ namespace MusicStore.Models
             var orderDetail = builder.Model.GetEntityType(typeof(OrderDetail));
             genre.AddNavigation(new Navigation(album.ForeignKeys.Single(k => k.ReferencedEntityType == genre), "Albums"));
             album.AddNavigation(new Navigation(orderDetail.ForeignKeys.Single(k => k.ReferencedEntityType == album), "OrderDetails"));
+            album.AddNavigation(new Navigation(album.ForeignKeys.Single(k => k.ReferencedEntityType == genre), "Genre"));
+            album.AddNavigation(new Navigation(album.ForeignKeys.Single(k => k.ReferencedEntityType == artist), "Artist"));
         }
     }
 }

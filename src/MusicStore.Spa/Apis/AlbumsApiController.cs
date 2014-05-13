@@ -59,8 +59,12 @@ namespace MusicStore.Apis
         }
 
         //[Route("api/albums/{albumId:int}")]
-        public ActionResult Details(int albumId)
+        public async Task<ActionResult> Details(int albumId)
         {
+            // TODO: Remove this when EF supports related entity loading
+            await _storeContext.Artists.ToListAsync();
+            await _storeContext.Genres.ToListAsync();
+
             // TODO: Make async when EF supports SingleOrDefaultAsync
             var album = _storeContext.Albums
                 .Include(a => a.Artist)
@@ -68,10 +72,6 @@ namespace MusicStore.Apis
                 .SingleOrDefault(a => a.AlbumId == albumId);
 
             // TODO: Add null checking and return 404 in that case
-
-            // TODO: Remove this when EF supports related entity loading
-            album.Artist = _storeContext.Artists.SingleOrDefault(a => a.ArtistId == album.ArtistId);
-            album.Genre = _storeContext.Genres.SingleOrDefault(g => g.GenreId == album.GenreId);
 
             return new SmartJsonResult
             {
