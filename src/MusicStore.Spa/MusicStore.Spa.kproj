@@ -29,6 +29,7 @@
     <Compile Include="Apis\ArtistsApiController.cs" />
     <Compile Include="Apis\GenresApiController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TemplateController.cs" />
     <Compile Include="Infrastructure\ApiResult.cs" />
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\ForcedModelError.cs" />

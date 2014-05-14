@@ -26,14 +26,14 @@ module.exports = function (grunt) {
             },
             release: {
                 files: {
-                    'public/app.min.js': ['<%= typescript.dev.dest %>']
+                    'wwwroot/app.min.js': ['<%= typescript.dev.dest %>']
                 }
             }
         },
         clean: {
             options: { force: true },
-            bower: ['public'],
-            assets: ['public'],
+            bower: ['wwwroot'],
+            assets: ['wwwroot'],
             tsng: ['client/**/*.ng.ts']
         },
         copy: {
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
                             "angular-route/*.{js,.js.map}",
                             "angular-bootstrap/ui-bootstrap*"
                         ],
-                        dest: "public/js/",
+                        dest: "wwwroot/js/",
                         options: { force: true }
                     },
                     {   // CSS
@@ -70,7 +70,7 @@ module.exports = function (grunt) {
                         src: [
                             "bootstrap/dist/**/*.css",
                         ],
-                        dest: "public/css/",
+                        dest: "wwwroot/css/",
                         options: { force: true }
                     },
                     {   // Fonts
@@ -80,7 +80,7 @@ module.exports = function (grunt) {
                         src: [
                             "bootstrap/**/*.{woff,svg,eot,ttf}",
                         ],
-                        dest: "public/fonts/",
+                        dest: "wwwroot/fonts/",
                         options: { force: true }
                     }
                 ]
@@ -93,7 +93,7 @@ module.exports = function (grunt) {
                         src: [
                             '<%= staticFilePattern %>'
                         ],
-                        dest: "public/",
+                        dest: "wwwroot/",
                         options: { force: true }
                     }
                 ]
@@ -105,7 +105,7 @@ module.exports = function (grunt) {
                     cleancss: false
                 },
                 files: {
-                    "public/css/site.css": "Client/**/*.less"
+                    "wwwroot/css/site.css": "Client/**/*.less"
                 }
             },
             release: {
@@ -113,7 +113,7 @@ module.exports = function (grunt) {
                     cleancss: true
                 },
                 files: {
-                    "public/css/site.css": "Client/**/*.less"
+                    "wwwroot/css/site.css": "Client/**/*.less"
                 }
             }
         },
@@ -154,11 +154,11 @@ module.exports = function (grunt) {
                     // TODO: Automate the generation of this config based on convention
                     {
                         src: ['Client/ng-apps/components/**/*.ng.ts', 'Client/ng-apps/MusicStore.Store/**/*.ng.ts'],
-                        dest: 'public/js/MusicStore.Store.js'
+                        dest: 'wwwroot/js/MusicStore.Store.js'
                     },
                     {
                         src: ['Client/ng-apps/components/**/*.ng.ts', 'Client/ng-apps/MusicStore.Admin/**/*.ng.ts'],
-                        dest: 'public/js/MusicStore.Admin.js'
+                        dest: 'wwwroot/js/MusicStore.Admin.js'
                     }
                 ]
             },
