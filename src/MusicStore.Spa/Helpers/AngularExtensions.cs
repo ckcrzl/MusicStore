@@ -46,10 +46,10 @@ namespace System.Web.Mvc.Html
         //    var expressionText = ExpressionHelper.GetExpressionText(expression);
         //    var metadata = ModelMetadata.FromLambdaExpression(expression, html.ViewData);
         //    var ngAttributes = new Dictionary<string, object>();
-            
+
         //    // Angular binding to client-side model (scope). This is required for Angular validation to work.
         //    ngAttributes["ng-model"] = html.ViewData.TemplateInfo.GetFullHtmlFieldName(expressionText);
-            
+
         //    // Set input type
         //    if (string.Equals(metadata.DataTypeName, Enum.GetName(typeof(DataType), DataType.EmailAddress), StringComparison.OrdinalIgnoreCase))
         //    {
@@ -137,35 +137,66 @@ namespace System.Web.Mvc.Html
         //    return html.TextBoxFor(expression, MergeAttributes(ngAttributes, htmlAttributes));
         //}
 
+        //private static bool IsNumberType(Type type)
+        //{
+        //    switch (Type.GetTypeCode(type))
+        //    {
+        //        case TypeCode.Int16:
+        //        case TypeCode.Int32:
+        //        case TypeCode.Int64:
+        //        case TypeCode.UInt16:
+        //        case TypeCode.UInt32:
+        //        case TypeCode.UInt64:
+        //        case TypeCode.Decimal:
+        //        case TypeCode.Double:
+        //        case TypeCode.Single:
+        //            return true;
+        //    }
+        //    return false;
+        //}
+
         private static bool IsNumberType(Type type)
         {
-            switch (Type.GetTypeCode(type))
+            if (type == typeof(Int16) ||
+                type == typeof(Int32) ||
+                type == typeof(Int64) ||
+                type == typeof(UInt16) ||
+                type == typeof(UInt32) ||
+                type == typeof(UInt64) ||
+                type == typeof(Decimal) ||
+                type == typeof(Double) ||
+                type == typeof(Single))
             {
-                case TypeCode.Int16:
-                case TypeCode.Int32:
-                case TypeCode.Int64:
-                case TypeCode.UInt16:
-                case TypeCode.UInt32:
-                case TypeCode.UInt64:
-                case TypeCode.Decimal:
-                case TypeCode.Double:
-                case TypeCode.Single:
-                    return true;
+                return true;
             }
             return false;
         }
 
+        //private static bool IsIntegerType(Type type)
+        //{
+        //    switch (Type.GetTypeCode(type))
+        //    {
+        //        case TypeCode.Int16:
+        //        case TypeCode.Int32:
+        //        case TypeCode.Int64:
+        //        case TypeCode.UInt16:
+        //        case TypeCode.UInt32:
+        //        case TypeCode.UInt64:
+        //            return true;
+        //    }
+        //    return false;
+        //}
+
         private static bool IsIntegerType(Type type)
         {
-            switch (Type.GetTypeCode(type))
+            if (type == typeof(Int16) ||
+                type == typeof(Int32) ||
+                type == typeof(Int64) ||
+                type == typeof(UInt16) ||
+                type == typeof(UInt32) ||
+                type == typeof(UInt64))
             {
-                case TypeCode.Int16:
-                case TypeCode.Int32:
-                case TypeCode.Int64:
-                case TypeCode.UInt16:
-                case TypeCode.UInt32:
-                case TypeCode.UInt64:
-                    return true;
+                return true;
             }
             return false;
         }

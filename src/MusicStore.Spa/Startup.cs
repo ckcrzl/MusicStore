@@ -7,6 +7,7 @@ using Microsoft.AspNet.FileSystems;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Security;
+using Microsoft.AspNet.Mvc.Rendering;
 using Microsoft.AspNet.Routing;
 using Microsoft.AspNet.Security.Cookies;
 using Microsoft.AspNet.StaticFiles;
@@ -33,6 +34,7 @@ namespace MusicStore.Spa
 
             app.UseServices(services =>
             {
+                // TODO: Don't put configuration in the container
                 services.AddInstance<IConfiguration>(new Configuration()
                     .AddJsonFile(Path.Combine(_applicationEnvironment.ApplicationBasePath, "LocalConfig.json"))
                     .AddEnvironmentVariables());
@@ -42,8 +44,11 @@ namespace MusicStore.Spa
                     .AddSqlServer()
                     .AddInMemoryStore();
                 services.AddScoped<MusicStoreContext>();
+                
+                // Register the Angular HTML helpers
+                services.AddTransient(typeof(IHtmlHelper<>), typeof(AngularHtmlHelper<>));
 
-                // Add all Identity related services to IoC. 
+                // Add all Identity related services to IoC.
                 // Using an InMemory store to store membership data until SQL server is available. 
                 // Users created will be lost on application shutdown.
                 services.AddTransient<DbContext, ApplicationDbContext>();
